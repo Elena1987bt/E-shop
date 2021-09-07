@@ -5,12 +5,24 @@ const router = express.Router();
 router
   .route('/')
   .get(productController.getAllProducts)
-  .post(productController.createProduct);
+  .post(
+    productController.uploadOptions.single('image'),
+    productController.createProduct
+  );
 router
   .route('/:id')
   .get(productController.getProduct)
-  .patch(productController.updateProduct)
+  .patch(
+    productController.uploadOptions.single('image'),
+    productController.updateProduct
+  )
   .delete(productController.deleteProduct);
+
+router.patch(
+  '/gallery-images/:id',
+  productController.uploadOptions.array('images', 10),
+  productController.updateGalleryImages
+);
 
 router.get('/get/count', productController.countProducts);
 router.get('/get/featuredProducts', productController.getFeaturedProducts);

@@ -22,7 +22,8 @@ app.options('*', cors());
 //Middleware
 app.use(express.json());
 app.use(morgan('tiny'));
-// app.use(authJwt());
+app.use(authJwt());
+app.use('/public/uploads', express.static(__dirname + '/public/uploads'));
 
 app.use(`${api}/products`, productRouter);
 app.use(`${api}/orders`, orderRouter);

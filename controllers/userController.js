@@ -50,9 +50,13 @@ exports.login = async (req, res, next) => {
 
     // 3. Check if password match
     if (user && bcrypt.compareSync(req.body.password, user.password)) {
-      const token = jwt.sign({ userId: user.id }, process.env.JWT_SECRET, {
-        expiresIn: '1d',
-      });
+      const token = jwt.sign(
+        { userId: user.id, isAdmin: user.isAdmin },
+        process.env.JWT_SECRET,
+        {
+          expiresIn: '1d',
+        }
+      );
       res.status(200).json({
         status: 'success',
         message: 'User Authenticated!',

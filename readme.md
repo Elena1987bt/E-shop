@@ -1,4 +1,4 @@
-# E-shop Application
+# E-shop App
 
 Built during the Udemy course:
 MERN Stack E-Commerce Mobile App with React Native [2021]
